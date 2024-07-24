@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: Live Weather Service
+  profiles:
+    active: dev
+weather:
+  location:
+    city: Ankara
+    country: Turkey
+  key: dee81ae44e24bb32c05d5da9fdd9f591
+
+
+logging:
+  level:
+    org.springframework.boot.autoconfigure: ERROR
+
+
+debug: true
