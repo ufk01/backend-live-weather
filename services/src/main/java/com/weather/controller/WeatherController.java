@@ -1,6 +1,5 @@
 package com.weather.controller;
 
-import com.weather.model.WeatherPropertiesDto;
 import com.weather.model.WeatherResponseDto;
 import com.weather.service.WeatherService;
 import org.springframework.http.HttpStatus;
@@ -18,9 +17,10 @@ public class WeatherController {
     }
 
     @GetMapping("/information")
-    public @ResponseBody ResponseEntity<WeatherResponseDto> getLiveWeatherInformation(@RequestBody WeatherPropertiesDto weatherPropertiesDto){
+    public @ResponseBody ResponseEntity<WeatherResponseDto> getLiveWeatherInformation(@RequestParam(value = "country", required = false) String country,
+                                                                                      @RequestParam(value = "city", required = false) String city){
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(weatherService.getInputInformations(weatherPropertiesDto));
+                .body(weatherService.getInputInformations(country, city));
     }
 }

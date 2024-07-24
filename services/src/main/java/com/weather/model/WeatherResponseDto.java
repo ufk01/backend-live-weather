@@ -28,12 +28,12 @@ public class WeatherResponseDto {
     private Wind wind;
 
     @JsonProperty("timezone")
-    private long timezone;
+    private Long timezone;
 
     @JsonProperty("name")
     private String name;
 
     @JsonProperty("dt")
-    private long dt;
+    private Long dt;
 
 }

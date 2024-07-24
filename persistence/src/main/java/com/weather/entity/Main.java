@@ -16,6 +16,4 @@ public class Main {
     private double temp_max;
     private int pressure;
     private int humidity;
-    private int sea_level;
-    private int grnd_level;
 }

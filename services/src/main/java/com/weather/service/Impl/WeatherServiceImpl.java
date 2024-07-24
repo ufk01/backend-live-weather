@@ -1,21 +1,16 @@
 package com.weather.service.Impl;
 
-import com.weather.config.WeatherProperties;
-import com.weather.mapper.WeatherPropertiesMapper;
-import com.weather.model.WeatherPropertiesDto;
 import com.weather.model.WeatherResponseDto;
 import com.weather.service.WeatherService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Objects;
 
 
 @Service
 public class WeatherServiceImpl implements WeatherService {
 
-    private static final WeatherPropertiesMapper weatherConfigMapper = WeatherPropertiesMapper.MAPPER;
     private final RestTemplate restTemplate;
 
     @Value("${weather.location.country}")
@@ -26,18 +21,11 @@ public class WeatherServiceImpl implements WeatherService {
     private String key;
 
     public WeatherServiceImpl(RestTemplate restTemplate){
-        this.restTemplate = restTemplate;
+        this.restTemplate = restTemplate; 
     }
     @Override
-    public WeatherResponseDto getInputInformations(WeatherPropertiesDto weatherPropertiesDto) {
-        String queryCountry = country;
-        String queryCity = city;
-        if(weatherPropertiesDto != null && Objects.nonNull(weatherPropertiesDto.getCity()) && Objects.nonNull(weatherPropertiesDto.getCountry())) {
-            WeatherProperties weatherProperties = weatherConfigMapper.weatherPropertiesDtoToWeatherProperties(weatherPropertiesDto);
-            queryCountry = weatherProperties.getCountry();
-            queryCity = weatherProperties.getCity();
-        }
-        return getLiveWeather(queryCountry, queryCity);
+    public WeatherResponseDto getInputInformations(String countryParam, String cityParam) {
+        return countryParam != null && cityParam != null ? getLiveWeather(countryParam, cityParam) : getLiveWeather(country, city);
     }
 
     public WeatherResponseDto getLiveWeather(String country, String city) {
