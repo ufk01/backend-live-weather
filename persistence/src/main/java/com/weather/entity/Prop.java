@@ -7,7 +7,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-
-public class Sys {
-    private String country;
+public class Prop {
+    private Double temp;
+    private Integer pressure;
+    private Integer humidity;
 }

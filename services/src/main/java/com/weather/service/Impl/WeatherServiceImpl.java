@@ -1,12 +1,11 @@
 package com.weather.service.Impl;
 
+import com.weather.model.WeatherApiResponseDto;
 import com.weather.model.WeatherResponseDto;
 import com.weather.service.WeatherService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
-
 
 @Service
 public class WeatherServiceImpl implements WeatherService {
@@ -25,13 +24,25 @@ public class WeatherServiceImpl implements WeatherService {
     }
     @Override
     public WeatherResponseDto getInputInformations(String countryParam, String cityParam) {
-        return countryParam != null && cityParam != null ? getLiveWeather(countryParam, cityParam) : getLiveWeather(country, city);
+        final WeatherApiResponseDto weatherApiResponseDto =  countryParam != null && cityParam != null ? getLiveWeather(countryParam, cityParam) :
+                countryParam == null && cityParam != null ? getLiveWeather(country, cityParam) : getLiveWeather(country, city);
+        return WeatherResponseDto.builder()
+                .temp(weatherApiResponseDto.getProp().getTemp())
+                .humidity(weatherApiResponseDto.getProp().getHumidity())
+                .pressure(weatherApiResponseDto.getProp().getPressure())
+                .country(weatherApiResponseDto.getSys().getCountry())
+                .city(weatherApiResponseDto.getName())
+                .windSpeed(weatherApiResponseDto.getWind().getSpeed())
+                .description(weatherApiResponseDto.getWeatherList().get(0).getDescription())
+                .icon(weatherApiResponseDto.getWeatherList().get(0).getIcon())
+                .dt(weatherApiResponseDto.getDt())
+                .build();
     }
 
-    public WeatherResponseDto getLiveWeather(String country, String city) {
+    public WeatherApiResponseDto getLiveWeather(String country, String city) {
         try {
             String url = buildWeatherApiUrl(country, city);
-            return restTemplate.getForObject(url, WeatherResponseDto.class);
+            return restTemplate.getForObject(url, WeatherApiResponseDto.class);
         } catch (Exception e) {
             throw new RuntimeException("Failed to fetch live weather data", e);
         }
