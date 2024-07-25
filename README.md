@@ -45,5 +45,4 @@ Additionally, the `resources` folder within the `services` module contains the `
 
 ## Additional Notes
 
-- To ensure all dependencies are loaded, run `./mvnw clean install` in the root directory of the project.
 - Ensure that the configuration files are set up correctly. Running `mvn clean install` from the root directory will also clean and install the submodules.
