@@ -1,5 +1,5 @@
 
-# How to Run the Backend
+# How to Run Backend
 
 The backend directory contains two `.yml` configuration files:
 
