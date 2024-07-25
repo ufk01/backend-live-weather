@@ -5,7 +5,7 @@ The backend directory contains two .yml configuration files: `application.yml` a
 - `application.yml` contains the general configuration information for the project.
 - `application-dev.yml` specifies the port number (5005) on which the project will run.
 
-  # If there is a port conflict, enter the appropriate port in this file !
+  ## If there is a port conflict, enter the appropriate port in 'application-dev.yml' file !
 
 Therefore, we need to set up the Spring Boot environment settings before running the application.
 
