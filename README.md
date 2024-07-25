@@ -1,37 +1,43 @@
-# How To Run Backend
 
-The backend directory contains two .yml configuration files: `application.yml` and `application-dev.yml`.
+# How to Run the Backend
 
-- `application.yml` contains the general configuration information for the project.
-- `application-dev.yml` specifies the port number (5005) on which the project will run.
+The backend directory contains two `.yml` configuration files:
 
-  #### If there is a port conflict, enter the appropriate port in `application-dev.yml` file !
+- `application.yml`: General configuration information for the project.
+- `application-dev.yml`: Specifies the port number (5005) on which the project will run. If there is a port conflict, update the port in this file.
 
-Therefore, we need to set up the Spring Boot environment settings before running the application.
+Before running the application, ensure that the Spring Boot environment settings are correctly configured.
 
-## 1) Build and Run
+## 1) Requirements
 
-The application runs with Java 19 SDK and uses `com.weather.LiveWeatherApplication` as the main class. We need to specify the active profile as `dev` to run the application.
+- **IntelliJ IDEA** (strongly recommended)
+- **Maven** (included with IntelliJ IDEA)
+- **Java 19 SDK**
 
-Steps:
+## 2) Build and Run
 
-### 1. Download and install Java 19 SDK.
-### 2. Navigate to the root directory of the `Live-Weather` project.
-### 3. Run the application with the following command:
-   ```sh
-   ./mvnw spring-boot:run -Dspring-boot.run.profiles=dev
-   ```
+### Steps:
 
-## 2) Project Structure
+1. **Download and Install Java 19 SDK**:
+   Ensure that Java 19 SDK is installed on your system.
 
-The project has a main (root) Maven module named `Live-Weather`. Within this Maven structure, there are two submodules: `persistence` and `services`.
+2. **Configure the Application**:
+   - The application uses `Java 19 SDK`, and the `services` module contains the main class `com.weather.LiveWeatherApplication`.
+   - Specify the active profile as `dev` to run the application.
+
+3. **Run the Application**:
+   - You can run the application either by using the run button in IntelliJ IDEA or by running the `Main` class directly.
+
+## 3) Project Structure
+
+The project has a root Maven module named `Live-Weather`, which includes the following submodules:
 
 - **Persistence Module**:
-  - Contains the attributes of the data retrieved from the Current Weather page, i.e., the objects to be used in the application from the returned JSON expression.
+  - Contains data attributes for the Current Weather page, representing objects used in the application from the JSON response.
 
 - **Service Module**:
-  - **Model (DTO)**: Contains Data Transfer Objects (DTO).
-  - **Config (RestTemplate)**: Contains RestTemplate configurations.
+  - **Model (DTO)**: Contains Data Transfer Objects (DTOs).
+  - **Config**: Contains RestTemplate configurations.
   - **Service**: Contains the `WeatherService` interface and the `WeatherServiceImpl` class.
   - **Controller**: Contains the `WeatherController` class.
 
@@ -39,5 +45,5 @@ Additionally, the `resources` folder within the `services` module contains the `
 
 ## Additional Notes
 
-- To ensure all dependencies are loaded, run the `./mvnw clean install` command in the root directory of the project.
-- Make sure the configuration files are set up correctly. Running `mvn clean install` from the root will also clean and install the submodules in one go.
+- To ensure all dependencies are loaded, run `./mvnw clean install` in the root directory of the project.
+- Ensure that the configuration files are set up correctly. Running `mvn clean install` from the root directory will also clean and install the submodules.
